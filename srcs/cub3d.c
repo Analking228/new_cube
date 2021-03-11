@@ -14,11 +14,11 @@
 
 int			main(int argc, char **argv)
 {
-	t_vars	vars;
+	t_all	all;
 
-	ft_parse(&vars, argc, argv);
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 640, 480, "AYE");
-	mlx_loop(vars.mlx);
-	ft_error("AAAAA", &vars);
+	//ft_validation();
+	ft_preparing(&all, argc, argv);
+	all.vars.mlx = mlx_init();
+	all.vars.win = mlx_new_window(all.vars.mlx, 640, 480, "AYE");
+	mlx_loop(all.vars.mlx);
 }

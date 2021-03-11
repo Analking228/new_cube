@@ -19,7 +19,8 @@ FILES = cub3d \
 		colors \
 		render \
 		errors \
-		parser 
+		parser \
+		preparation 
 
 
 SRCS_FILES = $(addsuffix .c, $(addprefix $(SRCS_DIR), $(FILES)))
@@ -32,7 +33,7 @@ all: $(OBJ_DIR) $(NAME)
 $(NAME): $(OBJ_FILES)
 	@make -C $(MLX_DIR)
 	@make -C $(LIBFT_DIR)
-	@$(CC) -o $(NAME) $(INCLUDES) $(OBJ_FILES) $(LIBFT_FLAGS) $(MLX_FLAGS)
+	@$(CC) -o $(NAME) $(INCLUDES) $(OBJ_FILES) $(LIBFT_FLAGS) $(MLX_FLAGS) -fsanitize=address
 
 $(OBJ_FILES): $(OBJ_DIR)%.o : $(SRCS_DIR)%.c
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
@@ -43,13 +44,13 @@ $(OBJ_DIR):
 clean:
 	@rm -rf $(OBJ_FILES)
 	@rm -f screenshot.bmp
-	#@make -C $(LIBFT_DIR) clean
+	@make -C $(LIBFT_DIR) clean
 	#@make -C $(MLX_DIR) clean
 	@echo "Project has been cleaned"
 
 fclean: clean
 	@rm -f $(NAME)
-	#@make -C $(LIBFT_DIR) fclean
+	@make -C $(LIBFT_DIR) fclean
 	#@make -C $(MLX_DIR) clean
 	@echo "$(NAME) and Libs has been removed"
 

@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   preparation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjani <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 14:48:06 by cjani             #+#    #+#             */
-/*   Updated: 2021/03/10 14:48:41 by cjani            ###   ########.fr       */
+/*   Created: 2021/03/11 18:10:21 by cjani             #+#    #+#             */
+/*   Updated: 2021/03/11 18:10:27 by cjani            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//any kid of erros should by operated here
+
 #include "../includes/include.h"
 
-int			ft_error(char *err, t_all *all)
+void		ft_init(t_all *all)
 {
-	mlx_destroy_window(all->vars.mlx, all->vars.win);
+	all->vars.w = 0;
+	all->vars.h = 0;
+	all->vars.mlx = NULL;
+	all->vars.win = NULL;
+}
+
+int			ft_preparing(t_all *all, int ac, char **av)
+{
+	int		i;
+
+	i = 0;
+	ft_init(all);
+	ft_parsing(all, ac, av);
+	if (!(all->vars.mlx = mlx_init()))
+		ft_error("MLX init error", all);
+	all->data.img = mlx_new_image(all->vars.mlx, all->vars.w, all->vars.h);
 	return (0);
 }
