@@ -15,5 +15,6 @@
 int			ft_error(char *err, t_all *all)
 {
 	mlx_destroy_window(all->vars.mlx, all->vars.win);
+	ft_putendl_fd(err, 1);
 	return (0);
 }

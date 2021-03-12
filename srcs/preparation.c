@@ -14,10 +14,21 @@
 
 void		ft_init(t_all *all)
 {
-	all->vars.w = 0;
-	all->vars.h = 0;
+	all->vars.w = 640;
+	all->vars.h = 480;
 	all->vars.mlx = NULL;
 	all->vars.win = NULL;
+}
+
+int			ft_preparing_img(t_vars *vars, t_data *data)
+{
+	if ((vars->mlx = mlx_init()))
+		if ((vars->win = mlx_new_window(vars->mlx, vars->w, vars->h, "CUBE")))
+			if ((data->img = mlx_new_image(vars->mlx, vars->w, vars->h)))
+				if ((data->addr = mlx_get_data_addr(data->img, \
+					&data->bits_per_pixel, &data->line_length, &data->endian)))
+					return (0);
+	return (1);
 }
 
 int			ft_preparing(t_all *all, int ac, char **av)
@@ -27,8 +38,11 @@ int			ft_preparing(t_all *all, int ac, char **av)
 	i = 0;
 	ft_init(all);
 	ft_parsing(all, ac, av);
-	if (!(all->vars.mlx = mlx_init()))
-		ft_error("MLX init error", all);
-	all->data.img = mlx_new_image(all->vars.mlx, all->vars.w, all->vars.h);
+	if (ft_preparing_img(&all->vars, &all->data))
+		ft_error("mlx-img init failed", all);
+	//ft_render(all);
+	ft_render_map(all);
+	//my_mlx_pixel_put(&all->data, 5, 5, 0x00FF0000);
+	mlx_put_image_to_window(all->vars.mlx, all->vars.win, all->data.img, 0, 0);
 	return (0);
 }

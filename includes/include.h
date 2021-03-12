@@ -9,10 +9,16 @@
 /*   Updated: 2021/03/10 13:26:05 by cjani            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef INCLUDE_CUBE_H
+# define INCLUDE_CUBE_H
+# include "../libs/libft/libft.h"
+# include "../libs/mlx/mlx.h"
+# include <fcntl.h>
+# include <math.h>
+# include <limits.h>
 
-#include "../libs/libft/libft.h"
-#include "../libs/mlx/mlx.h"
-#include <fcntl.h>
+# define G_SCALE
+
 
 
 			/*********** Structs ************/
@@ -75,7 +81,11 @@ int			ft_parsing(t_all *all, int ac, char **av);
 			/************ Render ************/
 
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int				ft_render(t_all *all);
+int				ft_render_map(t_all *all);
 
 			/************ Errors ************/
 
 int				ft_error(char *err, t_all *all);
+
+#endif
