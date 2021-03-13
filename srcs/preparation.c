@@ -18,6 +18,11 @@ void		ft_init(t_all *all)
 	all->vars.h = 480;
 	all->vars.mlx = NULL;
 	all->vars.win = NULL;
+	all->plr.x = 0;
+	all->plr.y = 0;
+	all->map.f_color = ft_color(0, 99, 0, 99);
+	all->map.f_color = ft_color(0, 0, 99, 0);
+
 }
 
 int			ft_preparing_img(t_vars *vars, t_data *data)
@@ -34,15 +39,14 @@ int			ft_preparing_img(t_vars *vars, t_data *data)
 int			ft_preparing(t_all *all, int ac, char **av)
 {
 	int		i;
+	int		j;
 
-	i = 0;
+	i = -1;
 	ft_init(all);
 	ft_parsing(all, ac, av);
 	if (ft_preparing_img(&all->vars, &all->data))
 		ft_error("mlx-img init failed", all);
-	//ft_render(all);
-	ft_render_map(all);
-	//my_mlx_pixel_put(&all->data, 5, 5, 0x00FF0000);
+	ft_render(all);
 	mlx_put_image_to_window(all->vars.mlx, all->vars.win, all->data.img, 0, 0);
 	return (0);
 }

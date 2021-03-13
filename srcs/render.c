@@ -20,23 +20,17 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void		ft_render_square(t_data *data, int x, int y)
+void		ft_render_square(t_data *data, int x, int y, int color)
 {
 	int		i;
 	int		j;
-	int		color;
 
-	color = create_trgb(0, 255, 0, 0);
-	i = -1;
-	while (++i < 5)
+	i = y * G_SCALE - 1;
+	while (++i < (y * G_SCALE + G_SCALE))
 	{
-		y++;
-		j = -1;
-		while (++j < 5)
-		{
-			x++;
-			my_mlx_pixel_put(data, x, y, color);
-		}
+		j = x * G_SCALE - 1;
+		while (++j < x * G_SCALE + G_SCALE)
+			my_mlx_pixel_put(data, j, i, color);
 	}
 }
 
@@ -45,25 +39,32 @@ int			ft_render_map(t_all *all)
 	int		i;
 	int		j;
 
-	i = 0;
-	while (all->map.map[i])
+	i = -1;
+	while (all->map.map[++i])
 	{
 		ft_putendl_fd(all->map.map[i], 1);
-		j = 0;
-		while (all->map.map[i][j] != '\0')
+		j = -1;
+		while (all->map.map[i][++j] != '\0')
 		{
-			if (all->map.map[i][j] == 1)
-				my_mlx_pixel_put(&all->data, j, i, 0x00FF0000);
-				//ft_render_square(data, j, i);
-			j++;
+			if (all->map.map[i][j] == '1')
+				ft_render_square(&all->data, j, i, ft_color(0, 255, 255, 255));
+			if (all->map.map[i][j] == 'N' || all->map.map[i][j] == 'S' || \
+			all->map.map[i][j] == 'W' || all->map.map[i][j] == 'E')
+			{
+				all->plr.x = j * G_SCALE;
+				all->plr.y = i * G_SCALE;
+				ft_render_square(&all->data, j, i, ft_color(0, 0, 0, 255));
+			}
 		}
-		i++;
 	}
 	return (0);
 }
 
 int			ft_render(t_all *all)
 {
+	mlx_do_sync(all->vars.mlx);
+	ft_color_floor(&all->vars, &all->data, &all->map);
+	ft_color_ceilling(&all->vars, &all->data, &all->map);
 	ft_render_map(all);
 	return (0);
 }

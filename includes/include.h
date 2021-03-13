@@ -17,7 +17,7 @@
 # include <math.h>
 # include <limits.h>
 
-# define G_SCALE
+# define G_SCALE 10
 
 
 
@@ -26,17 +26,19 @@
 typedef struct		s_map
 {
 	char			**map;
+	int				f_color;
+	int				c_color;
 	int				plr_pos[2];
 }					t_map;
 
 typedef struct		s_player
 {
-	double				x;
-	double				y;
+	int					x;
+	int					y;
 }					t_plr;
 
 
-typedef struct		s_data
+typedef struct		s_image
 {
 	void			*img;
 	char			*addr;
@@ -45,7 +47,7 @@ typedef struct		s_data
 	int				endian;
 }					t_data;
 
-typedef struct		s_vars
+typedef struct		s_mlx_variables
 {
 	void			*mlx;
 	void			*win;
@@ -53,22 +55,20 @@ typedef struct		s_vars
 	int				h;
 }					t_vars;
 
-typedef struct		s_all
+typedef struct		s_master
 {
 	t_vars			vars;
 	t_map			map;
 	t_data			data;
+	t_plr			plr;
 }					t_all;
 
 
 			/************ Colors ************/
 
-int				create_trgb(int t, int r, int g, int b);
-int				get_t(int trgb);
-int				get_r(int trgb);
-int				get_g(int trgb);
-int				get_b(int trgb);
-int				create_negative(int trgb);
+int				ft_color(int t, int r, int g, int b);
+void			ft_color_floor(t_vars *vars, t_data *data, t_map *map);
+void			ft_color_ceilling(t_vars *vars, t_data *data, t_map *map);
 
 			/********* Preparations *********/
 

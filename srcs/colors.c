@@ -12,32 +12,39 @@
 
 #include "../includes/include.h"
 
-int			create_trgb(int t, int r, int g, int b)
+int			ft_color(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int			get_t(int trgb)
+void		ft_color_floor(t_vars *vars, t_data *data, t_map *map)
 {
-	return (trgb & (0xFF << 24));
+	int		i;
+	int		j;
+	int		height;
+	int		width;
+
+	i = -1;
+	height = vars->h/2;
+	width = vars->w;
+	while (++i < height)
+	{
+		j = -1;
+		while (++j < width)
+			my_mlx_pixel_put(data, j, i, map->f_color);
+	}
 }
 
-int			get_r(int trgb)
+void		ft_color_ceilling(t_vars *vars, t_data *data, t_map *map)
 {
-	return (trgb & (0xFF << 16));
-}
+	int		height;
+	int		width;
 
-int			get_g(int trgb)
-{
-	return (trgb & (0xFF << 8));
-}
-
-int			get_b(int trgb)
-{
-	return (trgb & 0xFF);
-}
-
-int			create_negative(int trgb)
-{
-	return (0x00FFFFFF ^ trgb);
+	height = vars->h/2 - 1;
+	while (++height < vars->h)
+	{
+		width = -1;
+		while (++width < vars->w)
+			my_mlx_pixel_put(data, width, height, map->f_color);
+	}
 }
