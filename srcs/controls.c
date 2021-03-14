@@ -12,39 +12,27 @@
 
 #include "../includes/include.h"
 
-int			ft_color(int t, int r, int g, int b)
+int			key_p_lr(int keycode, t_all *all)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	/*if (keycode == LEFT)
+		all->plr.x -= 1;
+	else if (keycode == RIGHT)
+		all->plr.x += 1;*/
+	if (keycode == W)
+		all->plr.y -= 2;
+	else if (keycode == S)
+		all->plr.y += 2;
+	else if (keycode == D)
+		all->plr.x += 2;
+	else if (keycode == A)
+		all->plr.x -= 2;
+	ft_render(all);
+	return (0);
 }
 
-void		ft_color_floor(t_vars *vars, t_data *data, t_map *map)
+int			key_p_term(int keykode, t_all *all)
 {
-	int		height;
-	int		width;
-
-	height = vars->h/2 - 1;
-	while (++height < vars->h)
-	{
-		width = -1;
-		while (++width < vars->w)
-			my_mlx_pixel_put(data, width, height, map->f_color);
-	}
-}
-
-void		ft_color_ceilling(t_vars *vars, t_data *data, t_map *map)
-{
-	int		i;
-	int		j;
-	int		height;
-	int		width;
-
-	i = -1;
-	height = vars->h/2;
-	width = vars->w;
-	while (++i < height)
-	{
-		j = -1;
-		while (++j < width)
-			my_mlx_pixel_put(data, j, i, map->c_color);
-	}
+	/*if (keycode == ESC)
+		close_me(all);*/
+	return (0);
 }

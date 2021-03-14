@@ -17,7 +17,14 @@
 # include <math.h>
 # include <limits.h>
 
-# define G_SCALE 10
+# define G_SCALE 10*2
+# define ESC	53
+# define LEFT	123
+# define RIGHT	124
+# define W		13
+# define D		2
+# define S		1
+# define A		0
 
 
 
@@ -35,6 +42,7 @@ typedef struct		s_player
 {
 	int					x;
 	int					y;
+	double				dir;
 }					t_plr;
 
 
@@ -76,7 +84,7 @@ int			ft_preparing(t_all *all, int ac, char **av);
 
 			/************ Parser ************/
 
-int			ft_parsing(t_all *all, int ac, char **av);
+int			ft_parser(t_all *all, int ac, char **av);
 
 			/************ Render ************/
 
@@ -87,5 +95,10 @@ int				ft_render_map(t_all *all);
 			/************ Errors ************/
 
 int				ft_error(char *err, t_all *all);
+
+			/*********** Controls ***********/
+
+int			key_p_lr(int keycode, t_all *all);
+int			key_p_fb(int keycode, t_all *all);
 
 #endif

@@ -12,11 +12,20 @@
 
 #include "../includes/include.h"
 
+int             key_hook(int keycode, t_vars *vars)
+{
+    ft_putnbr_fd(keycode, 1);
+	ft_putendl_fd("", 1);
+}
+
 int			main(int argc, char **argv)
 {
 	t_all	all;
 
 	//ft_validation();
 	ft_preparing(&all, argc, argv);
+	//mlx_hook(all.vars.win, 17, 0, close_me, &all);
+	//mlx_key_hook(all.vars.win, key_hook, &all.vars);
+	mlx_hook(all.vars.win, 2, 1L<<0, key_p_lr, &all);
 	mlx_loop(all.vars.mlx);
 }
