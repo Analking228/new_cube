@@ -16,8 +16,9 @@
 # include <fcntl.h>
 # include <math.h>
 # include <limits.h>
+# include <stdio.h>
 
-# define G_SCALE 10*2
+# define G_SCALE 20
 # define ESC	53
 # define LEFT	123
 # define RIGHT	124
@@ -25,6 +26,7 @@
 # define D		2
 # define S		1
 # define A		0
+# define FOV (M_PI / 3)
 
 
 
@@ -40,9 +42,11 @@ typedef struct		s_map
 
 typedef struct		s_player
 {
-	int					x;
-	int					y;
-	double				dir;
+	float				x;
+	float				y;
+	float				dir;
+	float				left;
+	float				right;
 }					t_plr;
 
 
@@ -100,5 +104,9 @@ int				ft_error(char *err, t_all *all);
 
 int			key_p_lr(int keycode, t_all *all);
 int			key_p_fb(int keycode, t_all *all);
+
+			/********** Raycasting **********/
+
+void		ft_cast_ray(t_all *all);
 
 #endif

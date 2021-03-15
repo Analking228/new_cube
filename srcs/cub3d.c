@@ -16,6 +16,7 @@ int             key_hook(int keycode, t_vars *vars)
 {
     ft_putnbr_fd(keycode, 1);
 	ft_putendl_fd("", 1);
+	return (0);
 }
 
 int			main(int argc, char **argv)
@@ -28,4 +29,5 @@ int			main(int argc, char **argv)
 	//mlx_key_hook(all.vars.win, key_hook, &all.vars);
 	mlx_hook(all.vars.win, 2, 1L<<0, key_p_lr, &all);
 	mlx_loop(all.vars.mlx);
+	return (0);
 }

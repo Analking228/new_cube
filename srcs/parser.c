@@ -29,6 +29,29 @@ int			ft_parser_make_map(t_list **head, int size, t_map *map)
 	return (0);
 }
 
+int			ft_parser_plr_src_dir(t_all *all, int i, int j, char dir)
+{
+	if (!all->plr.x && !all->plr.y)
+	{
+		all->plr.x = (float)j * G_SCALE;
+		all->plr.y = (float)i * G_SCALE;
+		if (dir == 'N')
+			all->plr.dir = M_PI_2;
+		if (dir == 'W')
+			all->plr.dir = M_PI;
+		if (dir == 'S')
+			all->plr.dir = M_PI_4 * 3;
+		if (dir == 'E')
+			all->plr.dir = 0;
+	}
+	else
+	{
+		ft_putendl_fd("Player Error", 1);
+		return (1);
+	}
+	return (0);
+}
+
 int			ft_parser_plr_src(t_all *all)
 {
 	int		i;
@@ -42,18 +65,8 @@ int			ft_parser_plr_src(t_all *all)
 		{
 			if (all->map.map[i][j] == 'N' || all->map.map[i][j] == 'S' || \
 			all->map.map[i][j] == 'W' || all->map.map[i][j] == 'E')
-			{
-				if (!all->plr.x && !all->plr.y)
-				{
-					all->plr.x = j * G_SCALE;
-					all->plr.y = i * G_SCALE;
-				}
-				else
-				{
-					ft_putendl_fd("Player Error", 1);
+				if (ft_parser_plr_src_dir(all, i, j, all->map.map[i][j]))
 					return (1);
-				}
-			}
 		}
 	}
 	return (0);

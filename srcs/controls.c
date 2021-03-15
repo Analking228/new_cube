@@ -19,13 +19,13 @@ int			key_p_lr(int keycode, t_all *all)
 	else if (keycode == RIGHT)
 		all->plr.x += 1;*/
 	if (keycode == W)
-		all->plr.y -= 2;
+		all->plr.y -= 2.f;
 	else if (keycode == S)
-		all->plr.y += 2;
+		all->plr.y += 2.f;
 	else if (keycode == D)
-		all->plr.x += 2;
+		all->plr.x += 2.f;
 	else if (keycode == A)
-		all->plr.x -= 2;
+		all->plr.x -= 2.f;
 	ft_render(all);
 	return (0);
 }

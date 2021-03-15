@@ -36,7 +36,8 @@ void		ft_render_square(t_data *data, int x_scl, int y_scl, int color)
 
 int			ft_render_plr(t_all *all)
 {
-	ft_render_square(&all->data, all->plr.x, all->plr.y, ft_color(0, 0, 0, 255));
+	//ft_render_square(&all->data, all->plr.x, all->plr.y, ft_color(0, 0, 0, 255));
+	ft_cast_ray(all);
 	return (0);
 }
 

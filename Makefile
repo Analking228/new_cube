@@ -21,7 +21,8 @@ FILES = cub3d \
 		errors \
 		parser \
 		preparation \
-		controls
+		controls \
+		raycasting
 
 
 SRCS_FILES = $(addsuffix .c, $(addprefix $(SRCS_DIR), $(FILES)))
