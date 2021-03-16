@@ -12,7 +12,7 @@
 
 #include "../includes/include.h"
 
-void		ft_validate_map(t_list *head, t_map *map, int last)
+/*void		ft_validate_map(t_list *head, t_map *map, int last)
 {
 	int		i;
 	int		j;
@@ -39,4 +39,4 @@ void		ft_validate_map(t_list *head, t_map *map, int last)
 				ft_error_parser("Map error", head, map->map);
 		}
 	}
-}
+}*/

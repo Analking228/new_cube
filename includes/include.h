@@ -118,9 +118,7 @@ int				ft_render_map(t_all *all);
 
 			/************ Errors ************/
 
-int				ft_error(char *err, t_all *all);
-int				ft_error_parser(char *err, t_list *head, char **map);
-int				ft_error_abort(char *err, t_all *all);
+int				ft_error_abort(char *err, t_all *all, t_list *head);
 
 			/*********** Controls ***********/
 

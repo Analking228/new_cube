@@ -54,7 +54,7 @@ void	ft_raycast(t_all *all)
 			//my_mlx_pixel_put(&all->data, ray.x, ray.y, 0x990099);
 		}
 		r_length = sqrt(pow(all->plr.x - ray.x, 2) + pow(all->plr.y - ray.y, 2));
-		wall_height = (all->vars.h / (r_length * fabs(cos(ray.left - ray.dir)))) * G_SCALE;
+		wall_height = (all->vars.h / (r_length /** fabs(cos(ray.left - ray.dir))*/ )) * G_SCALE;
 		ft_raycast_wall(all, &ray, wall_height, x);
 		x++;
 		ray.left += (FOV / all->vars.w);

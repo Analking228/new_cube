@@ -12,7 +12,7 @@
 
 #include "../includes/include.h"
 
-void		ft_controls_pos_fb(t_map *map, t_plr *plr, float speed)
+/*void		ft_controls_pos_fb(t_map *map, t_plr *plr, float speed)
 {
 	int		i;
 	int		j;
@@ -58,4 +58,4 @@ int			key_p(int keycode, t_all *all)
 		ft_controls_pos_lr(&all->map, &all->plr, -3.f);
 	ft_render(all);
 	return (0);
-}
+}*/

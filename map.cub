@@ -1,11 +1,11 @@
-R 1920 1080
-NO ./textures/redbrick.xpm
-SO ./textures/redbrick.xpm
+R 1920 1080     
+NO ./textures/redbrick.xpm  
+SO ./textures/redbrick.xpm  
 WE ./textures/redbrick.xpm
 EA ./textures/redbrick.xpm
 
 S ./textures/barrel.xpm
-F 220,100,0
+F 220,0,0
 C 225,30,0
 
         1111111111111111111111111

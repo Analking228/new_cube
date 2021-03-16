@@ -26,33 +26,20 @@ static void	close_mlx(t_all *all)
 		free(all->vars.mlx);
 }
 
-int			ft_error_abort(char *err, t_all *all)
+int			ft_error_abort(char *err, t_all *all, t_list *head)
 {
 	int		i;
 
 	i = -1;
 	close_mlx(all);
-	while(all->map.map[++i])
-		free(all->map.map[i]);
-	free(all->map.map[i]);
-	free(all->map.map);
-	ft_putendl_fd(err, 1);
-	exit(0);
-	return (0);
-}
-
-int			ft_error_parser(char *err, t_list *head, char **map)
-{
-	int		i;
-
-	i = -1;
-	ft_lstclear(&head, free);
-	if (map)
+	if (head)
+		ft_lstclear(&head, free);
+	if (all->map.map)
 	{
-		while(map[++i])
-			free(map[i]);
-		free(map[i]);
-		free(map);
+		while(all->map.map[++i])
+			free(all->map.map[i]);
+		free(all->map.map[i]);
+		free(all->map.map);
 	}
 	ft_putendl_fd(err, 1);
 	exit(0);
