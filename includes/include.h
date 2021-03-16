@@ -108,6 +108,7 @@ int				ft_parser(t_all *all, int ac, char **av);
 int				ft_parser_map_src(char *str);
 void			ft_parser_resolution(char *res, t_list *list, t_all *all);
 void			ft_parser_texture(char *res, t_list *list, t_all *all, char t);
+void			ft_parser_color(char *res, t_list *list, t_all *all, char t);
 
 			/************ Render ************/
 

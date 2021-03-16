@@ -41,7 +41,32 @@ static void		ft_txt_import(char *p, t_data *txt, t_all *all, t_list *list)
 
 void			ft_parser_color(char *res, t_list *list, t_all *all, char t)
 {
+	int			rgb[3];
+	int			com;
+	int			i;
 
+	com = 0;
+	i = 0;
+	while (*res)
+	{
+		if (ft_isdigit(*res))
+		{
+			rgb[i++] = ft_atoi(res);
+			ft_putnbr_fd(rgb[i-1], 1);
+			if (rgb[i - 1] >= 256 || i > 3)
+				ft_error_parser("Invalid color format", list, all->map.map);
+			while (*res && ft_isdigit(*res))
+				res++;
+		}
+		if (*res++ == ',')
+			com++;
+	}
+	if (t == 'F' && all->map.f_color == -1)
+		all->map.f_color = ft_color(0, rgb[0], rgb[1], rgb[2]);
+	else if (t == 'C' && all->map.c_color == -1)
+		all->map.c_color = ft_color(0, rgb[0], rgb[1], rgb[2]);
+	else
+		ft_error_parser("Invalid color format", list, all->map.map);
 }
 
 void			ft_parser_texture(char *res, t_list *list, t_all *all, char t)

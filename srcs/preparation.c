@@ -14,23 +14,25 @@
 
 void		ft_init(t_all *all)
 {
+	all->map.map = NULL;
 	all->vars.w = -1;
 	all->vars.h = -1;
 	all->vars.mlx = NULL;
 	all->vars.win = NULL;
 	all->plr.x = 0;
 	all->plr.y = 0;
-	all->map.c_color = ft_color(0, 100, 100, 100);
-	all->map.f_color = ft_color(0, 0, 100, 0);
+	all->map.c_color = -1;
+	all->map.f_color = -1;
 	all->txt.North.img = NULL;
 	all->txt.South.img = NULL;
 	all->txt.West.img = NULL;
 	all->txt.East.img = NULL;
+	all->txt.Sprite.img = NULL;
 	all->txt.North.addr = NULL;
 	all->txt.South.addr = NULL;
 	all->txt.West.addr = NULL;
 	all->txt.East.addr = NULL;
-
+	all->txt.Sprite.addr = NULL;
 }
 
 int			ft_preparing_img(t_vars *vars, t_data *data)

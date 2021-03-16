@@ -18,7 +18,7 @@ int			ft_parser_make_map(t_list *head, t_map *map)
 	int		flag;
 	int		size;
 
-	while (++i < 6)
+	while (++i < 11)
 		head = head->next;
 	size = ft_lstsize(head);
 	if (!(map->map = (char **)ft_calloc(size + 1, sizeof(char *))))
@@ -93,6 +93,12 @@ void		ft_parser_vars(t_all *all, t_list *head)
 			ft_parser_texture(&tmp->content[3], head, all, 'E');
 		else if (ft_strnstr(tmp->content, "SO ", len))
 			ft_parser_texture(&tmp->content[3], head, all, 'S');
+		else if (ft_strnstr(tmp->content, "S ", len))
+			ft_parser_texture(&tmp->content[2], head, all, 's');
+		else if (ft_strnstr(tmp->content, "F ", len))
+			ft_parser_color(&tmp->content[2], head, all, 'F');
+		else if (ft_strnstr(tmp->content, "C ", len))
+			ft_parser_color(&tmp->content[2], head, all, 'C');
 		tmp = tmp->next;
 	}
 }

@@ -47,10 +47,13 @@ int			ft_error_parser(char *err, t_list *head, char **map)
 
 	i = -1;
 	ft_lstclear(&head, free);
-	while(map[++i])
+	if (map)
+	{
+		while(map[++i])
+			free(map[i]);
 		free(map[i]);
-	free(map[i]);
-	free(map);
+		free(map);
+	}
 	ft_putendl_fd(err, 1);
 	exit(0);
 	return (0);
