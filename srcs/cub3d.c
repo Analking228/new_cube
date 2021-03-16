@@ -27,7 +27,7 @@ int			main(int argc, char **argv)
 	ft_preparing(&all, argc, argv);
 	//mlx_hook(all.vars.win, 17, 0, close_me, &all);
 	//mlx_key_hook(all.vars.win, key_hook, &all.vars);
-	mlx_hook(all.vars.win, 2, 1L<<0, key_p_lr, &all);
+	mlx_hook(all.vars.win, 2, 1L<<0, key_p, &all);
 	mlx_loop(all.vars.mlx);
 	return (0);
 }

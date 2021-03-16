@@ -12,32 +12,48 @@
 
 #include "../includes/include.h"
 
-int			key_p_lr(int keycode, t_all *all)
+void		ft_controls_pos_fb(t_map *map, t_plr *plr, float speed)
+{
+	int		i;
+	int		j;
+
+	i = (plr->y + sin(plr->dir) * speed) / G_SCALE;
+	j = (plr->x + cos(plr->dir) * speed) / G_SCALE;
+	if (map->map[i][j] != '1')
+	{
+		plr->y += sin(plr->dir) * speed;
+		plr->x += cos(plr->dir) * speed;
+	}
+}
+
+void		ft_controls_pos_lr(t_map *map, t_plr *plr, float speed)
+{
+	int		i;
+	int		j;
+
+	i = (plr->y - cos(plr->dir) * speed) / G_SCALE;
+	j = (plr->x + sin(plr->dir) * speed) / G_SCALE;
+	if (map->map[i][j] != '1')
+	{
+		plr->y -= cos(plr->dir) * speed;
+		plr->x += sin(plr->dir) * speed;
+	}
+}
+
+int			key_p(int keycode, t_all *all)
 {
 	if (keycode == LEFT)
 		all->plr.dir -= tan(0.1f);
 	else if (keycode == RIGHT)
 		all->plr.dir += tan(0.1f);
 	if (keycode == W)
-	{
-		all->plr.y -= sin(all->plr.dir) * 2.f;
-		all->plr.x -= cos(all->plr.dir) * 2.f;
-	}
+		ft_controls_pos_fb(&all->map, &all->plr, -2.f);
 	else if (keycode == S)
-	{
-		all->plr.y += sin(all->plr.dir);
-		all->plr.x += cos(all->plr.dir);
-	}
+		ft_controls_pos_fb(&all->map, &all->plr, 1.f);
 	else if (keycode == D)
-	{
-		all->plr.y -= cos(all->plr.dir) * 2.f;
-		all->plr.x += sin(all->plr.dir) * 2.f;
-	}
+		ft_controls_pos_lr(&all->map, &all->plr, 2.f);
 	else if (keycode == A)
-	{
-		all->plr.y += cos(all->plr.dir) * 2.f;
-		all->plr.x -= sin(all->plr.dir) * 2.f;
-	}
+		ft_controls_pos_lr(&all->map, &all->plr, -2.f);
 	ft_render(all);
 	return (0);
 }

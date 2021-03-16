@@ -22,12 +22,9 @@ void	ft_raycast_init(t_plr *ray, t_plr *plr)
 void	ft_raycast(t_all *all)
 {
 	t_plr	ray;
-	int		i;
-	int		j;
 
 	ft_raycast_init(&ray, &all->plr);
-	i = (int)(ray.y / G_SCALE);
-	j = (int)(ray.x / G_SCALE);
+
 	ray.left = ray.dir - (FOV / 2.f);
 	ray.right = ray.dir + (FOV / 2.f);
 	while (ray.left <= ray.right)

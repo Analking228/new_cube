@@ -102,8 +102,7 @@ int				ft_error(char *err, t_all *all);
 
 			/*********** Controls ***********/
 
-int			key_p_lr(int keycode, t_all *all);
-int			key_p_fb(int keycode, t_all *all);
+int			key_p(int keycode, t_all *all);
 
 			/********** Raycasting **********/
 
