@@ -19,13 +19,25 @@ int			key_p_lr(int keycode, t_all *all)
 	else if (keycode == RIGHT)
 		all->plr.dir += tan(0.1f);
 	if (keycode == W)
-		all->plr.y -= 2.f;
+	{
+		all->plr.y -= sin(all->plr.dir) * 2.f;
+		all->plr.x -= cos(all->plr.dir) * 2.f;
+	}
 	else if (keycode == S)
-		all->plr.y += 2.f;
+	{
+		all->plr.y += sin(all->plr.dir);
+		all->plr.x += cos(all->plr.dir);
+	}
 	else if (keycode == D)
-		all->plr.x += 2.f;
+	{
+		all->plr.y -= cos(all->plr.dir) * 2.f;
+		all->plr.x += sin(all->plr.dir) * 2.f;
+	}
 	else if (keycode == A)
-		all->plr.x -= 2.f;
+	{
+		all->plr.y += cos(all->plr.dir) * 2.f;
+		all->plr.x -= sin(all->plr.dir) * 2.f;
+	}
 	ft_render(all);
 	return (0);
 }

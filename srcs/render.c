@@ -36,7 +36,6 @@ void		ft_render_square(t_data *data, int x_scl, int y_scl, int color)
 
 int			ft_render_plr(t_all *all)
 {
-	//ft_render_square(&all->data, all->plr.x, all->plr.y, ft_color(0, 0, 0, 255));
 	ft_raycast(all);
 	return (0);
 }
@@ -49,7 +48,6 @@ int			ft_render_map(t_all *all)
 	i = -1;
 	while (all->map.map[++i])
 	{
-		//ft_putendl_fd(all->map.map[i], 1);
 		j = -1;
 		while (all->map.map[i][++j] != '\0')
 		{
