@@ -57,6 +57,8 @@ typedef struct		s_image
 {
 	void			*img;
 	char			*addr;
+	int				w;
+	int				h;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
@@ -68,6 +70,7 @@ typedef struct 		s_master_texture
 	t_data			East;
 	t_data			South;
 	t_data			West;
+	t_data			Sprite;
 }					t_textures;
 
 
@@ -97,11 +100,14 @@ void			ft_color_ceilling(t_vars *vars, t_data *data, t_map *map);
 
 			/********* Preparations *********/
 
-int			ft_preparing(t_all *all, int ac, char **av);
+int				ft_preparing(t_all *all, int ac, char **av);
 
 			/************ Parser ************/
 
-int			ft_parser(t_all *all, int ac, char **av);
+int				ft_parser(t_all *all, int ac, char **av);
+int				ft_parser_map_src(char *str);
+void			ft_parser_resolution(char *res, t_list *list, t_all *all);
+void			ft_parser_texture(char *res, t_list *list, t_all *all, char t);
 
 			/************ Render ************/
 
@@ -112,15 +118,15 @@ int				ft_render_map(t_all *all);
 			/************ Errors ************/
 
 int				ft_error(char *err, t_all *all);
-int				ft_error_parser(char *err, t_list *head, char *line, char **map);
+int				ft_error_parser(char *err, t_list *head, char **map);
 int				ft_error_abort(char *err, t_all *all);
 
 			/*********** Controls ***********/
 
-int			key_p(int keycode, t_all *all);
+int				key_p(int keycode, t_all *all);
 
 			/********** Raycasting **********/
 
-void		ft_raycast(t_all *all);
+void			ft_raycast(t_all *all);
 
 #endif
