@@ -43,9 +43,10 @@ int			ft_preparing(t_all *all, int ac, char **av)
 
 	i = -1;
 	ft_init(all);
-	ft_parser(all, ac, av);
+	if (ft_parser(all, ac, av))
+		return (1);
 	if (ft_preparing_img(&all->vars, &all->data))
-		ft_error("mlx-img init failed", all);
+		ft_error_abort("mlx-img init failed", all);
 	ft_render(all);
 	return (0);
 }

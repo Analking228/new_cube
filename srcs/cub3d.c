@@ -12,13 +12,6 @@
 
 #include "../includes/include.h"
 
-int             key_hook(int keycode, t_vars *vars)
-{
-    ft_putnbr_fd(keycode, 1);
-	ft_putendl_fd("", 1);
-	return (0);
-}
-
 int			main(int argc, char **argv)
 {
 	t_all	all;

@@ -47,10 +47,7 @@ int			ft_parser_plr_src_dir(t_all *all, int i, int j, char dir)
 			all->plr.dir = 0;
 	}
 	else
-	{
-		ft_putendl_fd("Player Error", 1);
 		return (1);
-	}
 	return (0);
 }
 
@@ -86,8 +83,10 @@ int			ft_parser(t_all *all, int ac, char **av)
 		ft_lstadd_back(&head, ft_lstnew(line));
 	ft_lstadd_back(&head, ft_lstnew(line));
 	if (ft_parser_make_map(&head, ft_lstsize(head), &all->map))
-		ft_error("malloc failed", all);
-	ft_parser_plr_src(all);//make defence
+		ft_error_parser("Malloc Error", head, line, all->map.map);
+	if (ft_parser_plr_src(all))
+		ft_error_parser("Double Player Error", head, line, all->map.map);
 	ft_lstclear(&head, free);
+	free(line);
 	return (0);
 }

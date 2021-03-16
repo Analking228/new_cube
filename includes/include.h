@@ -17,6 +17,7 @@
 # include <math.h>
 # include <limits.h>
 # include <stdio.h>
+# include <errno.h>
 
 # define G_SCALE 20
 # define M_SCALE 5
@@ -61,6 +62,15 @@ typedef struct		s_image
 	int				endian;
 }					t_data;
 
+typedef struct 		s_master_texture
+{
+	t_data			North;
+	t_data			East;
+	t_data			South;
+	t_data			West;
+}					t_textures;
+
+
 typedef struct		s_mlx_variables
 {
 	void			*mlx;
@@ -74,6 +84,7 @@ typedef struct		s_master
 	t_vars			vars;
 	t_map			map;
 	t_data			data;
+	t_textures		txt;
 	t_plr			plr;
 }					t_all;
 
@@ -101,6 +112,8 @@ int				ft_render_map(t_all *all);
 			/************ Errors ************/
 
 int				ft_error(char *err, t_all *all);
+int				ft_error_parser(char *err, t_list *head, char *line, char **map);
+int				ft_error_abort(char *err, t_all *all);
 
 			/*********** Controls ***********/
 

@@ -42,6 +42,8 @@ void		ft_controls_pos_lr(t_map *map, t_plr *plr, float speed)
 
 int			key_p(int keycode, t_all *all)
 {
+	if (keycode == ESC)
+		ft_error_abort("See you next time", all);
 	if (keycode == LEFT)
 		all->plr.dir -= tan(0.1f);
 	else if (keycode == RIGHT)
@@ -55,12 +57,5 @@ int			key_p(int keycode, t_all *all)
 	else if (keycode == A)
 		ft_controls_pos_lr(&all->map, &all->plr, -3.f);
 	ft_render(all);
-	return (0);
-}
-
-int			key_p_term(int keykode, t_all *all)
-{
-	/*if (keycode == ESC)
-		close_me(all);*/
 	return (0);
 }
