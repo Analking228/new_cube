@@ -19,6 +19,7 @@
 # include <stdio.h>
 
 # define G_SCALE 20
+# define M_SCALE 5
 # define ESC	53
 # define LEFT	123
 # define RIGHT	124
@@ -37,7 +38,8 @@ typedef struct		s_map
 	char			**map;
 	int				f_color;
 	int				c_color;
-	int				plr_pos[2];
+	float			plr_x;
+	float			plr_y;
 }					t_map;
 
 typedef struct		s_player

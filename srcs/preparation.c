@@ -14,8 +14,8 @@
 
 void		ft_init(t_all *all)
 {
-	all->vars.w = 720;
-	all->vars.h = 480;
+	all->vars.w = 900;
+	all->vars.h = 600;
 	all->vars.mlx = NULL;
 	all->vars.win = NULL;
 	all->plr.x = 0;

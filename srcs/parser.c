@@ -34,7 +34,9 @@ int			ft_parser_plr_src_dir(t_all *all, int i, int j, char dir)
 	if (!all->plr.x && !all->plr.y)
 	{
 		all->plr.x = ((float)j * G_SCALE) + G_SCALE /2.f;
+		all->map.plr_x = ((float)j * G_SCALE) + G_SCALE /2.f;
 		all->plr.y = ((float)i * G_SCALE) + G_SCALE /2.f;
+		all->map.plr_y = ((float)i * G_SCALE) + G_SCALE /2.f;
 		if (dir == 'N')
 			all->plr.dir = M_PI_2;
 		if (dir == 'W')

@@ -26,10 +26,10 @@ void		ft_render_square(t_data *data, int x_scl, int y_scl, int color)
 	int		j;
 
 	i = y_scl - 1;
-	while (++i < (y_scl + G_SCALE))
+	while (++i < (y_scl + M_SCALE))
 	{
 		j = x_scl - 1;
-		while (++j < x_scl + G_SCALE)
+		while (++j < x_scl + M_SCALE)
 			my_mlx_pixel_put(data, j, i, color);
 	}
 }
@@ -52,7 +52,7 @@ int			ft_render_map(t_all *all)
 		while (all->map.map[i][++j] != '\0')
 		{
 			if (all->map.map[i][j] == '1')
-				ft_render_square(&all->data, j * G_SCALE, i * G_SCALE, ft_color(0, 255, 255, 255));
+				ft_render_square(&all->data, j * M_SCALE, i * M_SCALE, ft_color(0, 255, 255, 255));
 		}
 	}
 	return (0);
@@ -63,8 +63,8 @@ int			ft_render(t_all *all)
 	mlx_do_sync(all->vars.mlx);
 	ft_color_ceilling(&all->vars, &all->data, &all->map);
 	ft_color_floor(&all->vars, &all->data, &all->map);
-	ft_render_map(all);
 	ft_render_plr(all);
+	//ft_render_map(all);
 	mlx_put_image_to_window(all->vars.mlx, all->vars.win, all->data.img, 0, 0);
 	return (0);
 }

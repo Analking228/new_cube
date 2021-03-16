@@ -47,13 +47,13 @@ int			key_p(int keycode, t_all *all)
 	else if (keycode == RIGHT)
 		all->plr.dir += tan(0.1f);
 	if (keycode == W)
-		ft_controls_pos_fb(&all->map, &all->plr, -2.f);
+		ft_controls_pos_fb(&all->map, &all->plr, -3.f);
 	else if (keycode == S)
 		ft_controls_pos_fb(&all->map, &all->plr, 1.f);
 	else if (keycode == D)
-		ft_controls_pos_lr(&all->map, &all->plr, 2.f);
+		ft_controls_pos_lr(&all->map, &all->plr, 3.f);
 	else if (keycode == A)
-		ft_controls_pos_lr(&all->map, &all->plr, -2.f);
+		ft_controls_pos_lr(&all->map, &all->plr, -3.f);
 	ft_render(all);
 	return (0);
 }
