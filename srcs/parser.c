@@ -18,7 +18,7 @@ int			ft_parser_make_map(t_list *head, t_map *map)
 	int		flag;
 	int		size;
 
-	while (++i < 11)
+	while (++i < 10)
 		head = head->next;
 	size = ft_lstsize(head);
 	if (!(map->map = (char **)ft_calloc(size + 1, sizeof(char *))))
@@ -26,9 +26,12 @@ int			ft_parser_make_map(t_list *head, t_map *map)
 	i = -1;
 	while (head)
 	{
+		//ft_putnbr_fd(i, 1);
 		map->map[++i] = ft_strdup(head->content);
 		head = head->next;
 	}
+	ft_putendl_fd("\n", 1);
+	ft_validate_map(head, map, i - 1);
 	return (0);
 }
 
@@ -82,7 +85,7 @@ void		ft_parser_vars(t_all *all, t_list *head)
 	while (tmp)
 	{
 		len = ft_strlen(tmp->content);
-		ft_putendl_fd(tmp->content, 1);
+		//ft_putendl_fd(tmp->content, 1);
 		if (ft_strnstr(tmp->content, "R ", len))
 			ft_parser_resolution(&tmp->content[2], head, all);
 		else if (ft_strnstr(tmp->content, "NO ", len))

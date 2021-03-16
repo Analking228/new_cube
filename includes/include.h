@@ -130,4 +130,6 @@ int				key_p(int keycode, t_all *all);
 
 void			ft_raycast(t_all *all);
 
+void		ft_validate_map(t_list *head, t_map *map, int last);
+
 #endif
