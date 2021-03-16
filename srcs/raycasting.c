@@ -19,7 +19,7 @@ void	ft_raycast_init(t_plr *ray, t_plr *plr)
 	ray->dir = plr->dir;
 }
 
-void	ft_raycast_wall(t_all *all, t_plr *ray, float r_len, float wall_h, float x)
+void	ft_raycast_wall(t_all *all, t_plr *ray, float wall_h, float x)
 {
 	float y;
 	int	equator;
@@ -54,8 +54,8 @@ void	ft_raycast(t_all *all)
 			//my_mlx_pixel_put(&all->data, ray.x, ray.y, 0x990099);
 		}
 		r_length = sqrt(pow(all->plr.x - ray.x, 2) + pow(all->plr.y - ray.y, 2));
-		wall_height = all->vars.h / r_length * G_SCALE;
-		ft_raycast_wall(all, &ray, r_length, wall_height, x);
+		wall_height = (all->vars.h / (r_length * fabs(cos(ray.left - ray.dir)))) * G_SCALE;
+		ft_raycast_wall(all, &ray, wall_height, x);
 		x++;
 		ray.left += (FOV / all->vars.w);
 	}

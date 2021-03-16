@@ -14,14 +14,14 @@
 
 void		ft_init(t_all *all)
 {
-	all->vars.w = 900;
-	all->vars.h = 600;
+	all->vars.w = 1920;
+	all->vars.h = 1080;
 	all->vars.mlx = NULL;
 	all->vars.win = NULL;
 	all->plr.x = 0;
 	all->plr.y = 0;
-	all->map.c_color = ft_color(0, 0, 0, 0);
-	all->map.f_color = ft_color(0, 0, 0, 0);
+	all->map.c_color = ft_color(0, 100, 100, 100);
+	all->map.f_color = ft_color(0, 0, 0, 23);
 
 }
 
