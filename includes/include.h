@@ -26,7 +26,7 @@
 # define D		2
 # define S		1
 # define A		0
-# define FOV (M_PI / 3)
+# define FOV (M_PI / 3.f) 
 
 
 
@@ -107,6 +107,6 @@ int			key_p_fb(int keycode, t_all *all);
 
 			/********** Raycasting **********/
 
-void		ft_cast_ray(t_all *all);
+void		ft_raycast(t_all *all);
 
 #endif

@@ -17,27 +17,29 @@ void	ft_raycast_init(t_plr *ray, t_plr *plr)
 	ray->x = plr->x;
 	ray->y = plr->y;
 	ray->dir = plr->dir;
-	ray->left = plr->left;
-	ray->right = plr->right;
 }
 
-void	ft_cast_ray(t_all *all)
+void	ft_raycast(t_all *all)
 {
-	t_plr	ray; // задаем координаты луча равные координатам игрока
+	t_plr	ray;
 	int		i;
 	int		j;
 
 	ft_raycast_init(&ray, &all->plr);
 	i = (int)(ray.y / G_SCALE);
 	j = (int)(ray.x / G_SCALE);
-	while (all->map.map[i][j] != '1')
+	ray.left = ray.dir - (FOV / 2.f);
+	ray.right = ray.dir + (FOV / 2.f);
+	while (ray.left <= ray.right)
 	{
-		ray.x += cos(ray.dir);
-		printf("%f\n", ray.x);
-		ray.y += sin(ray.dir);
-		printf("%f\n", ray.y);
-		my_mlx_pixel_put(&all->data, ray.x, ray.y, 0x990099);
-		i = (int)(ray.y / G_SCALE);
-		j = (int)(ray.x / G_SCALE);
+		ray.x = all->plr.x;
+		ray.y = all->plr.y;
+		while (all->map.map[(int)(ray.y / G_SCALE)][(int)(ray.x / G_SCALE)] != '1')
+		{
+			ray.x -= cos(ray.left);
+			ray.y -= sin(ray.left);
+			my_mlx_pixel_put(&all->data, ray.x, ray.y, 0x990099);
+		}
+		ray.left += (FOV / 480.f);
 	}
 }

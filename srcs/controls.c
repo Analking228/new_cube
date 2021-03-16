@@ -14,10 +14,10 @@
 
 int			key_p_lr(int keycode, t_all *all)
 {
-	/*if (keycode == LEFT)
-		all->plr.x -= 1;
+	if (keycode == LEFT)
+		all->plr.dir -= tan(0.1f);
 	else if (keycode == RIGHT)
-		all->plr.x += 1;*/
+		all->plr.dir += tan(0.1f);
 	if (keycode == W)
 		all->plr.y -= 2.f;
 	else if (keycode == S)
