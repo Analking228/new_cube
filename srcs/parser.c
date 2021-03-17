@@ -3,57 +3,116 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjani <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:25:02 by cjani             #+#    #+#             */
-/*   Updated: 2021/03/10 13:25:09 by cjani            ###   ########.fr       */
+/*   Updated: 2021/03/17 04:46:40 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/include.h"
 
-/*int			ft_parser_make_map(t_list *head, t_map *map)
+int			check_map_str(char *str)
+{
+	char	*tmp;
+
+	if (str)
+	{
+		while (*str && (!ft_isspace(*str) || *str == '1'))
+		{
+			str++;
+			if (*str == 0)
+				return (1);
+		}
+
+	}
+	return (0);
+}
+
+int			ft_parser_make_map(t_list *head, t_map *map)
 {
 	int		i;
 	int		flag;
 	int		size;
-
-	while (++i < 10)
-		head = head->next;
-	size = ft_lstsize(head);
-	if (!(map->map = (char **)ft_calloc(size + 1, sizeof(char *))))
-		return (1);
+	t_list	*tmp;
+	
+	tmp = head;
+	while (tmp && !(check_map_str(tmp->content)))
+		tmp = tmp->next;
+	size = ft_lstsize(tmp);
+	map->map = (char**)ft_calloc(size + 1, sizeof(char *));
 	i = -1;
-	while (head)
+	while (tmp)
 	{
-		//ft_putnbr_fd(i, 1);
-		map->map[++i] = ft_strdup(head->content);
-		head = head->next;
+		map->map[++i] = ft_strdup(tmp->content);
+		ft_putendl_fd(map->map[i], 1);
+		tmp = tmp->next;
 	}
-	ft_putendl_fd("\n", 1);
-	ft_validate_map(head, map, i - 1);
 	return (0);
+}
+
+void		set_dir(t_all *all, float l, float r, float x, float y)
+{
+	all->ray.left = l;
+	all->ray.right = r;
+	all->plr.dir_x = x;
+	all->plr.dir_y = y;
 }
 
 int			ft_parser_plr_src_dir(t_all *all, int i, int j, char dir)
 {
-	if (!all->plr.x && !all->plr.y)
+	printf("%d %d\n", i, j);
+	if (!all->plr.pos_x && !all->plr.pos_y)
 	{
-		all->plr.x = ((float)j * G_SCALE) + G_SCALE /2.f;
-		all->plr.y = ((float)i * G_SCALE) + G_SCALE /2.f;
+		all->plr.pos_x = j + 0.001f;
+		all->plr.pos_y = i + 0.001f;
 		if (dir == 'N')
-			all->plr.dir = M_PI_2;
+			set_dir(all, -0.66, 0, 0, -1);
 		if (dir == 'W')
-			all->plr.dir = M_PI;
+			set_dir(all, 0, 0.66, -1, 0);
 		if (dir == 'S')
-			all->plr.dir = M_PI_4 * 3;
+			set_dir(all, 0.66, 0, 0, 1);
 		if (dir == 'E')
-			all->plr.dir = 0;
+			set_dir(all, 0, -0.66, 1, 0);
 	}
 	else
 		return (1);
 	return (0);
-}*/
+}
+
+int			ft_parser_plr_src(t_all *all)
+{
+	int		i;
+	int		j;
+
+	// i = -1;
+	// printf("_________________________________\n");
+	// while (all->map.map[++i])
+	// {
+	// 	j = -1;
+	// 	while(all->map.map[i][++j])
+	// 	{
+	// 			printf("%c", all->map.map[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
+	// printf("_________________________________\n");
+	i = -1;
+	while (all->map.map[++i])
+	{
+		j = -1;
+		while(all->map.map[i][++j])
+		{
+			if (all->map.map[i][j] == 'W' || all->map.map[i][j] == 'S' || \
+			all->map.map[i][j] == 'N' || all->map.map[i][j] == 'E')
+				if (ft_parser_plr_src_dir(all, i, j, all->map.map[i][j]))
+					ft_error_abort("Double Player error", all, NULL);
+		}
+	}
+	if (!all->plr.pos_x && !all->plr.pos_y)
+		ft_error_abort("NULL Player error", all, NULL);
+	return (0);
+}
 
 void		ft_parser_vars(t_all *all, t_list *head)
 {
@@ -64,7 +123,6 @@ void		ft_parser_vars(t_all *all, t_list *head)
 	while (tmp)
 	{
 		len = ft_strlen(tmp->content);
-		ft_putendl_fd(tmp->content, 1);
 		if (ft_strnstr(tmp->content, "R ", len))
 			ft_parser_resolution(ft_strtrim(tmp->content, "R "), head, all);
 		else if (ft_strnstr(tmp->content, "NO ", len))
@@ -97,10 +155,10 @@ int			ft_parser(t_all *all, int ac, char **av)
 		ft_lstadd_back(&head, ft_lstnew(line));
 	ft_lstadd_back(&head, ft_lstnew(line));
 	ft_parser_vars(all, head);
-	/*if (ft_parser_make_map(head, &all->map))
-		ft_error_parser("Malloc Error", head, all->map.map);
-	if (ft_parser_plr_src(all))
-		ft_error_parser("Double Player Error", head, all->map.map);*/
+	if (ft_parser_make_map(head, &all->map))
+		ft_error_abort("Malloc Error", all, head);
 	ft_lstclear(&head, free);
+	if (ft_parser_plr_src(all))
+		ft_error_abort("Double Player Error", all, head);
 	return (0);
 }

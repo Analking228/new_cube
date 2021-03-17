@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preparation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjani <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 18:10:21 by cjani             #+#    #+#             */
-/*   Updated: 2021/03/11 18:10:27 by cjani            ###   ########.fr       */
+/*   Updated: 2021/03/17 04:48:32 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void		ft_init(t_all *all)
 	all->vars.h = -1;
 	all->vars.mlx = NULL;
 	all->vars.win = NULL;
-	all->plr.x = 0;
-	all->plr.y = 0;
+	all->plr.pos_x = 0;
+	all->plr.pos_y = 0;
 	all->map.c_color = -1;
 	all->map.f_color = -1;
 	all->txt.North.img = NULL;
@@ -50,10 +50,10 @@ int			ft_preparing(t_all *all, int ac, char **av)
 	ft_init(all);
 	if (!(all->vars.mlx = mlx_init()))
 		ft_error_abort("mlx failed", all, NULL);
-	if (ft_parser(all, ac, av))
-		return (1);
+	ft_parser(all, ac, av);
+	ft_validator(all);
 	if (ft_preparing_img(&all->vars, &all->data))
 		ft_error_abort("mlx-img init failed", all, NULL);
-	//ft_render(all);
+	ft_raycast(all);
 	return (0);
 }

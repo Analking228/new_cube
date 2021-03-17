@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjani <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:56:31 by cjani             #+#    #+#             */
-/*   Updated: 2021/03/10 15:56:34 by cjani            ###   ########.fr       */
+/*   Updated: 2021/03/17 02:07:03 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,51 +20,43 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void		ft_render_square(t_data *data, int x_scl, int y_scl, int color)
+static void		ft_get_texture(t_all *all, int x)
 {
-	int		i;
-	int		j;
+	int		color;
 
-	i = y_scl - 1;
-	while (++i < (y_scl + M_SCALE))
+	while (all->ray.drawStart <= all->ray.drawEnd)
 	{
-		j = x_scl - 1;
-		while (++j < x_scl + M_SCALE)
-			my_mlx_pixel_put(data, j, i, color);
+		if (all->ray.side == 1)
+			all->txt.tex_y = (int)all->txt.tex_pos & (all->txt.East.h - 1);
+		else if (all->ray.side == 2)
+			all->txt.tex_y = (int)all->txt.tex_pos & (all->txt.South.h - 1);
+		else if (all->ray.side == 3)
+			all->txt.tex_y = (int)all->txt.tex_pos & (all->txt.North.h - 1);
+		else if (all->ray.side == 4)
+			all->txt.tex_y = (int)all->txt.tex_pos & (all->txt.West.h - 1);
+		all->txt.tex_pos += all->txt.step;
+		if (all->ray.side == 1)
+			color = color_ea(all, all->txt.tex_x, all->txt.tex_y);
+		else if (all->ray.side == 2)
+			color = color_so(all, all->txt.tex_x, all->txt.tex_y);
+		else if (all->ray.side == 3)
+			color = color_no(all, all->txt.tex_x, all->txt.tex_y);
+		else if (all->ray.side == 4)
+			color = color_we(all, all->txt.tex_x, all->txt.tex_y);
+		my_mlx_pixel_put(&all->data, x, all->ray.drawStart++, color);
 	}
 }
 
-int			ft_render_plr(t_all *all)
+void		ft_render_coloumn(t_all *all, int x)
 {
-	ft_raycast(all);
-	return (0);
-}
-
-int			ft_render_map(t_all *all)
-{
+	int		color;
 	int		i;
-	int		j;
 
 	i = -1;
-	while (all->map.map[++i])
-	{
-		j = -1;
-		while (all->map.map[i][++j] != '\0')
-		{
-			if (all->map.map[i][j] == '1')
-				ft_render_square(&all->data, j * M_SCALE, i * M_SCALE, ft_color(0, 255, 255, 255));
-		}
-	}
-	return (0);
-}
-
-int			ft_render(t_all *all)
-{
-	mlx_do_sync(all->vars.mlx);
-	ft_color_ceilling(&all->vars, &all->data, &all->map);
-	ft_color_floor(&all->vars, &all->data, &all->map);
-	ft_render_plr(all);
-	//ft_render_map(all);
-	mlx_put_image_to_window(all->vars.mlx, all->vars.win, all->data.img, 0, 0);
-	return (0);
+	while (++i < all->ray.drawStart)
+		my_mlx_pixel_put(&all->data, x, i, all->map.c_color);
+	ft_get_texture(all, x);
+	i = all->ray.drawEnd;
+	while (++i < all->vars.h)
+		my_mlx_pixel_put(&all->data, x, i, all->map.f_color);
 }

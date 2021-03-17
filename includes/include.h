@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   include.c                                          :+:      :+:    :+:   */
+/*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjani <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:26:03 by cjani             #+#    #+#             */
-/*   Updated: 2021/03/10 13:26:05 by cjani            ###   ########.fr       */
+/*   Updated: 2021/03/17 03:26:00 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef INCLUDE_CUBE_H
 # define INCLUDE_CUBE_H
 # include "../libs/libft/libft.h"
@@ -28,7 +29,7 @@
 # define D		2
 # define S		1
 # define A		0
-# define FOV (M_PI / 3.f) 
+
 
 
 
@@ -39,17 +40,14 @@ typedef struct		s_map
 	char			**map;
 	int				f_color;
 	int				c_color;
-	float			plr_x;
-	float			plr_y;
 }					t_map;
 
 typedef struct		s_player
 {
-	float				x;
-	float				y;
-	float				dir;
-	float				left;
-	float				right;
+	float				pos_x;
+	float				pos_y;
+	float				dir_x;
+	float				dir_y;
 }					t_plr;
 
 
@@ -71,6 +69,11 @@ typedef struct 		s_master_texture
 	t_data			South;
 	t_data			West;
 	t_data			Sprite;
+	int				tex_x;
+	int				tex_y;
+	float			wall_x;
+	float			step;
+	float			tex_pos;
 }					t_textures;
 
 
@@ -82,6 +85,56 @@ typedef struct		s_mlx_variables
 	int				h;
 }					t_vars;
 
+typedef struct	s_sprite_location
+{
+	double			x;
+	double			y;
+	double			dist;
+}					t_sprt_loc;
+typedef struct	s_sprite_variables
+{
+	double			x;
+	double			y;
+	double			inv;
+	double			transX;
+	double			transY;
+	int				sp_screenX;
+	int				sp_hight;
+	int				sp_width;
+	int				start_x;
+	int				start_y;
+	int				end_x;
+	int				end_y;
+	int				stripe;
+	int				tex_x;
+	int				tex_y;
+	int				i;
+	int				d;
+}					t_sprite;
+
+typedef struct		s_ray_variables
+{
+	float			left;
+	float			right;
+	float			cameraX;
+	float			rayDirX;
+	float			rayDirY;
+	float			sideDistX;
+	float			sideDistY;
+	float			deltaDistX;
+	float			deltaDistY;
+	int				mapX;
+	int				mapY;
+	int				stepX;
+	int				stepY;
+	int				hit;
+	int				side;
+	float			perpWallDist;
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+}					t_ray;
+
 typedef struct		s_master
 {
 	t_vars			vars;
@@ -89,14 +142,14 @@ typedef struct		s_master
 	t_data			data;
 	t_textures		txt;
 	t_plr			plr;
+	t_ray			ray;
+	t_sprite		sprt;
 }					t_all;
 
 
 			/************ Colors ************/
 
 int				ft_color(int t, int r, int g, int b);
-void			ft_color_floor(t_vars *vars, t_data *data, t_map *map);
-void			ft_color_ceilling(t_vars *vars, t_data *data, t_map *map);
 
 			/********* Preparations *********/
 
@@ -113,8 +166,7 @@ void			ft_parser_color(char *res, t_list *list, t_all *all, char t);
 			/************ Render ************/
 
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int				ft_render(t_all *all);
-int				ft_render_map(t_all *all);
+void			ft_render_coloumn(t_all *all, int x);
 
 			/************ Errors ************/
 
@@ -127,7 +179,21 @@ int				key_p(int keycode, t_all *all);
 			/********** Raycasting **********/
 
 void			ft_raycast(t_all *all);
+void			ft_raycast_get_texture(t_all *all);
+int				ft_texture_color(t_data *texture, int x, int y);
 
+			/********** Validation **********/
+
+void		ft_validator(t_all *all);
 void		ft_validate_map(t_list *head, t_map *map, int last);
+
+/////////////////////////////////////////////
+
+int		color_no(t_all *all, int x, int y);
+int		color_ea(t_all *all, int x, int y);
+int		color_so(t_all *all, int x, int y);
+int		color_s(t_all *all, int x, int y);
+int		color_we(t_all *all, int x, int y);
+void	sprite(t_all *all, float dist[]);
 
 #endif

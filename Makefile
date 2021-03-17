@@ -22,10 +22,11 @@ FILES = cub3d \
 		parser \
 		preparation \
 		controls \
-		raycasting \
+		raycast \
 		parser_utils \
-		validation
-
+		sprites\
+		validator \
+		raycast_utils
 
 SRCS_FILES = $(addsuffix .c, $(addprefix $(SRCS_DIR), $(FILES)))
 
