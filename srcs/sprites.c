@@ -1,10 +1,10 @@
 #include "../includes/include.h"
 
-int			col_sprite(t_all *all)
+static int		ft_sprite_count(t_all *all)
 {
-	int		i;
-	int		j;
-	int		res;
+	int			i;
+	int			j;
+	int			res;
 
 	res = 0;
 	j = -1;
@@ -18,27 +18,27 @@ int			col_sprite(t_all *all)
 	return (res);
 }
 
-void		cast_sprt_loc(t_sprt_loc sp[], t_all *all)
+void			cast_sprt_loc(t_sprt_loc *sprites, t_all *all)
 {
-	int		i_sp;
-	int		x;
-	int		y;
+	int			count;
+	int			j;
+	int			i;
 
-	y = -1;
-	i_sp = -1;
-	while (all->map.map[++y])
+	i = -1;
+	count = -1;
+	while (all->map.map[++i])
 	{
-		x = -1;
-		while (all->map.map[y][++x])
-			if (all->map.map[y][x] == '2')
+		j = -1;
+		while (all->map.map[i][++j])
+			if (all->map.map[i][j] == '2')
 			{
-				sp[++i_sp].x = x + 0.5;
-				sp[i_sp].y = y + 0.5;
+				sprites[++count].x = j + 0.5;
+				sprites[count].y = i + 0.5;
 			}
 	}
 }
 
-void		swap_sprt(t_sprt_loc *a, t_sprt_loc *b)
+void			swap_sprt(t_sprt_loc *a, t_sprt_loc *b)
 {
 	t_sprt_loc	c;
 
@@ -48,10 +48,10 @@ void		swap_sprt(t_sprt_loc *a, t_sprt_loc *b)
 
 }
 
-void		sort_sprite(t_sprt_loc sp[], int n)
+void			sort_sprite(t_sprt_loc *sp, int n)
 {
-	int		i;
-	int		j;
+	int			i;
+	int			j;
 
 	i = -1;
 	while (++i < n)
@@ -63,7 +63,7 @@ void		sort_sprite(t_sprt_loc sp[], int n)
 	}
 }
 
-void		sprt_screen(t_all *all, t_sprt_loc sp[], int i)
+void			sprt_screen(t_all *all, t_sprt_loc *sp, int i)
 {
 	all->sprt.x = sp[i].x -all->plr.pos_x;
 	all->sprt.y = sp[i].y -all->plr.pos_y;
@@ -73,7 +73,7 @@ void		sprt_screen(t_all *all, t_sprt_loc sp[], int i)
 	all->sprt.sp_screenX = (int)(all->vars.w - all->vars.w / 2 * (1 + all->sprt.transX / all->sprt.transY));
 }
 
-void		sprt_h_w(t_all *all)
+void			ft_sprite_hw(t_all *all)
 {
 	all->sprt.sp_hight = abs((int)(all->vars.h / all->sprt.transY));
 	all->sprt.sp_width = abs((int)(all->vars.w / all->sprt.transY));
@@ -92,45 +92,21 @@ void		sprt_h_w(t_all *all)
 	all->sprt.stripe = all->sprt.start_x;
 }
 
-void		draw_sprt(t_all *all, float dist[])
+void			ft_sprite(t_all *all, float *dist)
 {
-	int		clr;
-
-	while (all->sprt.stripe < all->sprt.end_x)
-	{
-		all->sprt.tex_x = (int)((all->sprt.stripe + all->sprt.sp_width / 2 - all->sprt.sp_screenX) * all->txt.Sprite.w / all->sprt.sp_width);
-		if (all->sprt.transY > 0 && all->sprt.transY < dist[all->sprt.stripe])
-		{
-			all->sprt.y = all->sprt.start_y;
-			while (all->sprt.y < all->sprt.end_y)
-			{
-				all->sprt.d = 128 * (all->sprt.y * 2 - all->vars.h + all->sprt.sp_hight);
-				all->sprt.tex_y = all->sprt.d * all->txt.Sprite.h / all->sprt.sp_hight / 256;
-				clr = color_s(all, all->sprt.tex_x, all->sprt.tex_y);
-				if (clr)
-					my_mlx_pixel_put(&all->data, all->sprt.stripe, (int)all->sprt.y, clr);
-				all->sprt.y += 1;
-			}
-		}
-		(all->sprt.stripe)++;
-	}
-}
-
-void		sprite(t_all *all, float dist[])
-{
-	t_sprt_loc	sprites[col_sprite(all)];
-	int				i;
+	t_sprt_loc	sprites[ft_sprite_count(all)];
+	int			i;
 
 	i = -1;
 	cast_sprt_loc(sprites, all);
-	while (++i < col_sprite(all))
+	while (++i < ft_sprite_count(all))
 		sprites[i].dist = (pow((all->plr.pos_x - sprites[i].x), 2) + pow((all->plr.pos_y - sprites[i].y), 2));
-	sort_sprite(sprites, col_sprite(all));
+	sort_sprite(sprites, ft_sprite_count(all));
 	i = -1;
-	while (++i < col_sprite(all))
+	while (++i < ft_sprite_count(all))
 	{
 		sprt_screen(all, sprites, i);
-		sprt_h_w(all);
-		draw_sprt(all, dist);
+		ft_sprite_hw(all);
+		ft_render_sprite(all, dist);
 	}
 }

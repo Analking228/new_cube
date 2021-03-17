@@ -113,6 +113,6 @@ void	ft_raycast(t_all *all)
 		ft_raycast_rayhit(all);
 		ft_raycast_prerender(all, dist, x);
 	}
-	sprite(all, dist);
+	ft_sprite(all, dist);
 	mlx_put_image_to_window(all->vars.mlx, all->vars.win, all->data.img, 0, 0);
 }

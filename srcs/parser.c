@@ -45,7 +45,6 @@ int			ft_parser_make_map(t_list *head, t_map *map)
 	while (tmp)
 	{
 		map->map[++i] = ft_strdup(tmp->content);
-		ft_putendl_fd(map->map[i], 1);
 		tmp = tmp->next;
 	}
 	return (0);
@@ -61,7 +60,6 @@ void		set_dir(t_all *all, float l, float r, float x, float y)
 
 int			ft_parser_plr_src_dir(t_all *all, int i, int j, char dir)
 {
-	printf("%d %d\n", i, j);
 	if (!all->plr.pos_x && !all->plr.pos_y)
 	{
 		all->plr.pos_x = j + 0.001f;
@@ -85,18 +83,6 @@ int			ft_parser_plr_src(t_all *all)
 	int		i;
 	int		j;
 
-	// i = -1;
-	// printf("_________________________________\n");
-	// while (all->map.map[++i])
-	// {
-	// 	j = -1;
-	// 	while(all->map.map[i][++j])
-	// 	{
-	// 			printf("%c", all->map.map[i][j]);
-	// 	}
-	// 	printf("\n");
-	// }
-	// printf("_________________________________\n");
 	i = -1;
 	while (all->map.map[++i])
 	{
@@ -160,5 +146,6 @@ int			ft_parser(t_all *all, int ac, char **av)
 	ft_lstclear(&head, free);
 	if (ft_parser_plr_src(all))
 		ft_error_abort("Double Player Error", all, head);
+	close(fd);
 	return (0);
 }

@@ -86,7 +86,6 @@ void			ft_parser_color(char *clr_str, t_list *list, t_all *all, char t)
 	char		**sp;
 	int			i;
 
-	ft_putendl_fd(clr_str, 1);
 	if (ft_count_com(clr_str) == 2)
 		sp = ft_split(clr_str, ',');
 	else
@@ -105,17 +104,3 @@ void			ft_parser_color(char *clr_str, t_list *list, t_all *all, char t)
 		ft_error_abort("Multiply color", all, list);
 	free(clr_str);
 }
-
-/*int				ft_parser_map_src(char *str)
-{
-	int			i;
-
-	i = 0;
-	if (str[i] == 0)
-		return (1);
-	if (ft_isalpha(str[i]))
-			return (1);
-	if (ft_isdigit(str[i]) || ft_isblank(str[i]))
-		return (0);
-	return (2);
-}*/

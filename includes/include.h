@@ -35,6 +35,25 @@
 
 			/*********** Structs ************/
 
+typedef struct		s_screen
+{
+	t_textures		txt;
+	t_sprite		sp;
+	t_data			data;
+	t_plr			plr;
+	int				w;
+	int				h;
+	int				width;
+	int				height;
+	int				f_color;
+	int				c_color;
+	char			**map;
+	void			*mlx;
+	void			*win;
+	float			planex;
+	float			planey;
+}					t_screen;
+
 typedef struct		s_map
 {
 	char			**map;
@@ -85,19 +104,19 @@ typedef struct		s_mlx_variables
 	int				h;
 }					t_vars;
 
-typedef struct	s_sprite_location
+typedef struct		s_sprite_location
 {
-	double			x;
-	double			y;
-	double			dist;
+	float			x;
+	float			y;
+	float			dist;
 }					t_sprt_loc;
-typedef struct	s_sprite_variables
+typedef struct		s_sprite_variables
 {
-	double			x;
-	double			y;
-	double			inv;
-	double			transX;
-	double			transY;
+	float			x;
+	float			y;
+	float			inv;
+	float			transX;
+	float			transY;
 	int				sp_screenX;
 	int				sp_hight;
 	int				sp_width;
@@ -150,6 +169,7 @@ typedef struct		s_master
 			/************ Colors ************/
 
 int				ft_color(int t, int r, int g, int b);
+int				ft_color_texture(t_data *texture, int x, int y);
 
 			/********* Preparations *********/
 
@@ -167,6 +187,7 @@ void			ft_parser_color(char *res, t_list *list, t_all *all, char t);
 
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render_coloumn(t_all *all, int x);
+void			ft_render_sprite(t_all *all, float *dist);
 
 			/************ Errors ************/
 
@@ -194,6 +215,6 @@ int		color_ea(t_all *all, int x, int y);
 int		color_so(t_all *all, int x, int y);
 int		color_s(t_all *all, int x, int y);
 int		color_we(t_all *all, int x, int y);
-void	sprite(t_all *all, float dist[]);
+void	ft_sprite(t_all *all, float dist[]);
 
 #endif
