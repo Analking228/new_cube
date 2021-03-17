@@ -51,6 +51,30 @@ static void	ft_validator_map(t_all *all)
 	}
 }
 
+static void	ft_validator_map2(t_all *all)
+{
+	char	**m;
+	int		i;
+	int		j;
+	int		last;
+
+	last = ft_count_map(all->map.map);
+	m = all->map.map;
+	i = -1;
+	while (m[++i])
+	{
+		j = -1;
+		while (m[i][++j])
+		{
+			if (i != last && i != 0)
+				if ((m[i][j] == '0' && m[i][j + 1] == ' ') || (m[i][j] == '0' &&
+				m[i][j - 1] == ' ') || (m[i][j] == '0' && m[i - 1][j] == ' ' )
+				|| (m[i][j] == '0' && m[i + 1][j] == ' '))
+					ft_error_abort("Map Error", all, NULL);
+		}
+	}
+}
+
 void		ft_validator(t_all *all)
 {
 	if (all->vars.w > 2560)
@@ -72,4 +96,5 @@ void		ft_validator(t_all *all)
 	if (all->txt.Sprite.img == NULL)
 		ft_error_abort("Sprite texture Error", all, NULL);
 	ft_validator_map(all);
+	ft_validator_map2(all);
 }
