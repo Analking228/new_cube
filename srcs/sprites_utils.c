@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   sprites_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cjani <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 13:25:21 by cjani             #+#    #+#             */
-/*   Updated: 2021/03/17 05:19:10 by kshanti          ###   ########.fr       */
+/*   Created: 2021/03/17 09:57:15 by cjani             #+#    #+#             */
+/*   Updated: 2021/03/17 09:57:17 by cjani            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/include.h"
 
-int			close_me(int key, t_all *all)
+void			swap_sprt(t_sprt_loc *a, t_sprt_loc *b)
 {
-	exit(1);
-	return (0);
+	t_sprt_loc	c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
 }
 
-int			main(int argc, char **argv)
+void			sort_sprite(t_sprt_loc *sp, int n)
 {
-	t_all	all;
+	int			i;
+	int			j;
 
-	ft_preparing(&all, argc, argv);
-	mlx_hook(all.vars.win, 17, 0, close_me, &all);
-	mlx_hook(all.vars.win, 2, 0, key_p, &all);
-	mlx_loop(all.vars.mlx);
-	return (0);
+	i = -1;
+	while (++i < n)
+	{
+		j = n;
+		while (--j > i)
+			if (sp[j - 1].dist < sp[j].dist)
+				swap_sprt(&sp[j], &sp[j - 1]);
+	}
 }

@@ -15,11 +15,11 @@
 static void		key_p_fb(t_all *all, int speed)
 {
 	if (ft_strchr("0WESN", all->map.map[(int)all->plr.pos_y]\
-	[(int)(all->plr.pos_x + (all->plr.dir_x * 0.1)  * speed)]))
-		all->plr.pos_x += (all->plr.dir_x * 0.1) * speed;
+	[(int)(all->plr.pos_x + (all->plr.dir_x * 0.1f) * speed)]))
+		all->plr.pos_x += (all->plr.dir_x * 0.1f) * speed;
 	if (ft_strchr("0WESN", all->map.map[(int)(all->plr.pos_y + \
-	(all->plr.dir_y * 0.1)  * speed)][(int)all->plr.pos_x]))
-		all->plr.pos_y += (all->plr.dir_y * 0.1)  * speed;
+	(all->plr.dir_y * 0.1) * speed)][(int)all->plr.pos_x]))
+		all->plr.pos_y += (all->plr.dir_y * 0.1f) * speed;
 	ft_raycast(all);
 }
 
@@ -34,7 +34,7 @@ static void		key_p_lr(t_all *all, int speed)
 	ft_raycast(all);
 }
 
-void		key_p_turn(t_all *all, int speed)
+void			key_p_turn(t_all *all, int speed)
 {
 	float old;
 	
@@ -51,7 +51,7 @@ void		key_p_turn(t_all *all, int speed)
 	ft_raycast(all);
 }
 
-int			key_p(int key, t_all *all)
+int				key_p(int key, t_all *all)
 {
 	if (key == ESC)
 		ft_error_abort("See you next time", all, NULL);

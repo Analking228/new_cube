@@ -91,6 +91,7 @@ typedef struct		s_sprite_location
 	float			y;
 	float			dist;
 }					t_sprt_loc;
+
 typedef struct		s_sprite_variables
 {
 	float			x;
@@ -150,7 +151,7 @@ typedef struct		s_master
 			/************ Colors ************/
 
 int				ft_color(int t, int r, int g, int b);
-int				ft_color_texture(t_data *texture, int x, int y);
+int				ft_color_txt(t_data *texture, int x, int y);
 
 			/********* Preparations *********/
 
@@ -163,6 +164,7 @@ int				ft_parser_map_src(char *str);
 void			ft_parser_resolution(char *res, t_list *list, t_all *all);
 void			ft_parser_texture(char *res, t_list *list, t_all *all, char t);
 void			ft_parser_color(char *res, t_list *list, t_all *all, char t);
+int				ft_parser_plr_src_dir(t_all *all, int i, int j, char dir);
 
 			/************ Render ************/
 
@@ -193,5 +195,6 @@ void		ft_validate_map(t_list *head, t_map *map, int last);
 
 void			ft_screen(t_all *all);
 void			ft_sprite(t_all *all, float dist[]);
+void			sort_sprite(t_sprt_loc *sp, int n);
 
 #endif

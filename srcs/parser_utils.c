@@ -49,7 +49,8 @@ static void		texture_import(char *p, t_data *txt, t_all *all, t_list *list)
 		ft_error_abort("Invalid file or format", all, list);
 }
 
-void			ft_parser_texture(char *clr_str, t_list *list, t_all *all, char t)
+void			ft_parser_texture(char *clr_str, t_list *list, t_all *all,\
+				char t)
 {
 	if (*clr_str != '.')
 		ft_error_abort("Texture Error", all, list);

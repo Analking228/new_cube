@@ -12,11 +12,18 @@
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (lst && del)
+	t_list	*tmp;
+
+	if (!new)
+		return ;
+	if (!*lst)
+		*lst = new;
+	else if (*lst && new)
 	{
-		del(lst->content);
-		free(lst);
+		tmp = *lst;
+		new->next = tmp;
+		*lst = new;
 	}
 }

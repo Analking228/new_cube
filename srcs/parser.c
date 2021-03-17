@@ -24,7 +24,6 @@ int			check_map_str(char *str)
 			if (*str == 0)
 				return (1);
 		}
-
 	}
 	return (0);
 }
@@ -35,7 +34,7 @@ int			ft_parser_make_map(t_list *head, t_map *map)
 	int		flag;
 	int		size;
 	t_list	*tmp;
-	
+
 	tmp = head;
 	while (tmp && !(check_map_str(tmp->content)))
 		tmp = tmp->next;
@@ -50,34 +49,6 @@ int			ft_parser_make_map(t_list *head, t_map *map)
 	return (0);
 }
 
-void		set_dir(t_all *all, float l, float r, float x, float y)
-{
-	all->ray.left = l;
-	all->ray.right = r;
-	all->plr.dir_x = x;
-	all->plr.dir_y = y;
-}
-
-int			ft_parser_plr_src_dir(t_all *all, int i, int j, char dir)
-{
-	if (!all->plr.pos_x && !all->plr.pos_y)
-	{
-		all->plr.pos_x = j + 0.001f;
-		all->plr.pos_y = i + 0.001f;
-		if (dir == 'N')
-			set_dir(all, -0.66, 0, 0, -1);
-		if (dir == 'W')
-			set_dir(all, 0, 0.66, -1, 0);
-		if (dir == 'S')
-			set_dir(all, 0.66, 0, 0, 1);
-		if (dir == 'E')
-			set_dir(all, 0, -0.66, 1, 0);
-	}
-	else
-		return (1);
-	return (0);
-}
-
 int			ft_parser_plr_src(t_all *all)
 {
 	int		i;
@@ -87,7 +58,7 @@ int			ft_parser_plr_src(t_all *all)
 	while (all->map.map[++i])
 	{
 		j = -1;
-		while(all->map.map[i][++j])
+		while (all->map.map[i][++j])
 		{
 			if (all->map.map[i][j] == 'W' || all->map.map[i][j] == 'S' || \
 			all->map.map[i][j] == 'N' || all->map.map[i][j] == 'E')
@@ -131,7 +102,7 @@ void		ft_parser_vars(t_all *all, t_list *head)
 
 int			ft_parser(t_all *all, int ac, char **av)
 {
-	int 	fd;
+	int		fd;
 	char	*line;
 	t_list	*head;
 

@@ -1,21 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   screenshot.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjani <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/17 09:34:13 by cjani             #+#    #+#             */
+/*   Updated: 2021/03/17 09:34:15 by cjani            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/include.h"
 
-void		make_head(unsigned char *bmp_h, unsigned char *bmp_f, t_all *scr)
+void				make_head(unsigned char *bmp_h, unsigned char *bmp_f, \
+								t_all *scr)
 {
-	int		size;
+	int				size;
 
- 	size = 14 + 40 + scr->vars.w * scr->vars.h * scr->data.bits_per_pixel / 8;
- 	bmp_h[0] = 'B';
- 	bmp_h[1] = 'M';
- 	bmp_h[2] = (unsigned char)(size);
- 	bmp_h[3] = (unsigned char)(size >> 8);
- 	bmp_h[4] = (unsigned char)(size >> 16);
- 	bmp_h[5] = (unsigned char)(size >> 24);
- 	bmp_h[10] = (unsigned char)(54);
- 	bmp_f[0] = (unsigned char)(40);
- 	bmp_f[4] = (unsigned char)(scr->vars.w);
- 	bmp_f[5] = (unsigned char)(scr->vars.w >> 8);
- 	bmp_f[6] = (unsigned char)(scr->vars.w >> 16);
+	size = 14 + 40 + scr->vars.w * scr->vars.h * scr->data.bits_per_pixel / 8;
+	bmp_h[0] = 'B';
+	bmp_h[1] = 'M';
+	bmp_h[2] = (unsigned char)(size);
+	bmp_h[3] = (unsigned char)(size >> 8);
+	bmp_h[4] = (unsigned char)(size >> 16);
+	bmp_h[5] = (unsigned char)(size >> 24);
+	bmp_h[10] = (unsigned char)(54);
+	bmp_f[0] = (unsigned char)(40);
+	bmp_f[4] = (unsigned char)(scr->vars.w);
+	bmp_f[5] = (unsigned char)(scr->vars.w >> 8);
+	bmp_f[6] = (unsigned char)(scr->vars.w >> 16);
 	bmp_f[7] = (unsigned char)(scr->vars.w >> 24);
 	bmp_f[8] = (unsigned char)(-scr->vars.h);
 	bmp_f[9] = (unsigned char)(-scr->vars.h >> 8);
@@ -25,12 +38,13 @@ void		make_head(unsigned char *bmp_h, unsigned char *bmp_f, t_all *scr)
 	bmp_f[14] = (unsigned char)(scr->data.bits_per_pixel);
 }
 
-void		make_file(unsigned char *bmp_h, unsigned char *bmp_f, t_all *scr)
+void				make_file(unsigned char *bmp_h, unsigned char *bmp_f,\
+							t_all *scr)
 {
-	int		fd;
-	char	*filename;
-	int		i;
-	int		size;
+	int				fd;
+	char			*filename;
+	int				i;
+	int				size;
 
 	i = -1;
 	filename = "screen.bmp";
@@ -43,7 +57,7 @@ void		make_file(unsigned char *bmp_h, unsigned char *bmp_f, t_all *scr)
 	close(fd);
 }
 
-void			ft_screen(t_all *all)
+void				ft_screen(t_all *all)
 {
 	unsigned char	bmp_head[14];
 	unsigned char	bmp_fhead[40];

@@ -9,7 +9,7 @@
 /*   Updated: 2021/03/10 14:48:41 by cjani            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//any kid of erros should by operated here
+
 #include "../includes/include.h"
 
 static void	close_mlx(t_all *all)
@@ -18,8 +18,16 @@ static void	close_mlx(t_all *all)
 		return ;
 	if (all->vars.win)
 		mlx_destroy_window(all->vars.mlx, all->vars.win);
-	/*if (all->texture.e.img)
-		mlx_destroy_image(all->frame.mlx, all->texture.e.img);*/
+	if (all->txt.East.img)
+		mlx_destroy_image(all->vars.mlx, all->txt.East.img);
+	if (all->txt.West.img)
+		mlx_destroy_image(all->vars.mlx, all->txt.West.img);
+	if (all->txt.North.img)
+		mlx_destroy_image(all->vars.mlx, all->txt.North.img);
+	if (all->txt.South.img)
+		mlx_destroy_image(all->vars.mlx, all->txt.South.img);
+	if (all->txt.Sprite.img)
+		mlx_destroy_image(all->vars.mlx, all->txt.Sprite.img);
 	if (all->data.img)
 		mlx_destroy_image(all->vars.mlx, all->data.img);
 	if (all->vars.mlx)
@@ -36,7 +44,7 @@ int			ft_error_abort(char *err, t_all *all, t_list *head)
 		ft_lstclear(&head, free);
 	if (all->map.map)
 	{
-		while(all->map.map[++i])
+		while (all->map.map[++i])
 			free(all->map.map[i]);
 		free(all->map.map[i]);
 		free(all->map.map);

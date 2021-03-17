@@ -12,7 +12,7 @@
 
 #include "../includes/include.h"
 
-static void ft_raycast_get_texture_scale(t_all *all, t_data *texture)
+static void	ft_raycast_get_texture_scale(t_all *all, t_data *texture)
 {
 	all->txt.tex_x = (int)(all->txt.wall_x * (float)texture->w);
 	all->txt.tex_x = texture->w - all->txt.tex_x - 1;

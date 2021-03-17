@@ -38,15 +38,15 @@ static void	ft_validator_map(t_all *all)
 		if (m[i][0] == 0 && m[i + 1] != NULL)
 			ft_error_abort("Map Error", all, NULL);
 		if (i == 0 && ft_strchr(m[i], '0'))
-				ft_error_abort("Map Error", all, NULL);
-		while(m[i][++j])
+			ft_error_abort("Map Error", all, NULL);
+		while (m[i][++j])
 		{
 			if ((i != last && i != 0 && m[i][j] == ' ') && (m[i][j - 1] == '0'\
 			|| m[i][j + 1] == '0' || m[i - 1][j] == '0' || m[i + 1][j] == '0'))
-				ft_error_abort("Map Error", all, NULL);				
+				ft_error_abort("Map Error", all, NULL);
 			if ((i != last && i != 0 && m[i][j] == '0') && (m[i][j - 1] == ' '\
 			|| m[i][j + 1] == ' ' || m[i - 1][j] == ' ' || m[i + 1][j] == ' '))
-				ft_error_abort("Map Error", all, NULL);	
+				ft_error_abort("Map Error", all, NULL);
 		}
 	}
 }
@@ -60,7 +60,7 @@ void		ft_validator(t_all *all)
 	if (all->map.c_color == -1)
 		ft_error_abort("No Celling color", all, NULL);
 	if (all->map.f_color == -1)
-		ft_error_abort("No Floor color", all, NULL);	
+		ft_error_abort("No Floor color", all, NULL);
 	if (all->txt.North.img == NULL)
 		ft_error_abort("North texture Error", all, NULL);
 	if (all->txt.South.img == NULL)

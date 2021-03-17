@@ -55,9 +55,17 @@ int			ft_preparing(t_all *all, int ac, char **av)
 	if (ft_preparing_img(&all->vars, &all->data))
 		ft_error_abort("mlx-img init failed", all, NULL);
 	ft_raycast(all);
-	if (ft_strnstr(av[2], "--save", 6))
-		ft_screen(all);
-	else
-		ft_error_abort("Bad argument", all, NULL);
+	if (ac > 3)
+		ft_error_abort("Too many arguments", all, NULL);
+	if (ac < 2)
+		ft_error_abort("Too few arguments", all, NULL);
+	if (ac == 3)
+	{
+		if (ft_strnstr(av[2], "--save", 6))
+		
+			ft_screen(all);
+		else
+			ft_error_abort("Bad argument", all, NULL);
+	}
 	return (0);
 }

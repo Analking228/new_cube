@@ -43,13 +43,17 @@ void	ft_raycast_prerender(t_all *all, float *dist, int x)
 {
 	if (all->ray.side < 3)
 	{
-		all->ray.perpWallDist = (all->ray.mapX - all->plr.pos_x + (1 - all->ray.stepX) / 2) / all->ray.rayDirX;
-		all->txt.wall_x = all->plr.pos_y + all->ray.perpWallDist * all->ray.rayDirY;
+		all->ray.perpWallDist = (all->ray.mapX - all->plr.pos_x + \
+		(1 - all->ray.stepX) / 2) / all->ray.rayDirX;
+		all->txt.wall_x = all->plr.pos_y + all->ray.perpWallDist * \
+		all->ray.rayDirY;
 	}
 	else
 	{
-		all->ray.perpWallDist = (all->ray.mapY - all->plr.pos_y + (1 - all->ray.stepY) / 2) / all->ray.rayDirY;
-		all->txt.wall_x = all->plr.pos_x + all->ray.perpWallDist * all->ray.rayDirX;
+		all->ray.perpWallDist = (all->ray.mapY - all->plr.pos_y + \
+		(1 - all->ray.stepY) / 2) / all->ray.rayDirY;
+		all->txt.wall_x = all->plr.pos_x + all->ray.perpWallDist * \
+		all->ray.rayDirX;
 	}
 	all->txt.wall_x -= (int)(all->txt.wall_x);
 	all->ray.lineHeight = all->vars.h / all->ray.perpWallDist;
@@ -58,7 +62,7 @@ void	ft_raycast_prerender(t_all *all, float *dist, int x)
 	if (all->ray.drawEnd >= all->vars.h)
 		all->ray.drawEnd = all->vars.h - 1;
 	if (all->ray.drawStart < 0)
-			all->ray.drawStart = 0;
+		all->ray.drawStart = 0;
 	dist[x] = all->ray.perpWallDist;
 	ft_raycast_get_texture(all);
 	ft_render_coloumn(all, x);
@@ -81,22 +85,26 @@ void	ft_raycast_step(t_all *all)
 	if (all->ray.rayDirX < 0)
 	{
 		all->ray.stepX = -1;
-		all->ray.sideDistX = (all->plr.pos_x - all->ray.mapX) * all->ray.deltaDistX;
+		all->ray.sideDistX = (all->plr.pos_x - all->ray.mapX) *\
+		all->ray.deltaDistX;
 	}
 	else
 	{
 		all->ray.stepX = 1;
-		all->ray.sideDistX = (all->ray.mapX - all->plr.pos_x + 1.0) * all->ray.deltaDistX;
+		all->ray.sideDistX = (all->ray.mapX - all->plr.pos_x + 1.0)\
+		* all->ray.deltaDistX;
 	}
 	if (all->ray.rayDirY < 0)
 	{
 		all->ray.stepY = -1;
-		all->ray.sideDistY = (all->plr.pos_y - all->ray.mapY) * all->ray.deltaDistY;
+		all->ray.sideDistY = (all->plr.pos_y - all->ray.mapY) *\
+		all->ray.deltaDistY;
 	}
 	else
 	{
 		all->ray.stepY = 1;
-		all->ray.sideDistY = (all->ray.mapY - all->plr.pos_y + 1.0) * all->ray.deltaDistY;
+		all->ray.sideDistY = (all->ray.mapY - all->plr.pos_y + 1.0)\
+		* all->ray.deltaDistY;
 	}
 }
 

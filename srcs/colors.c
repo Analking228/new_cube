@@ -17,7 +17,7 @@ int			ft_color(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int		ft_color_texture(t_data *texture, int x, int y)
+int			ft_color_txt(t_data *texture, int x, int y)
 {
 	int		res;
 
@@ -28,6 +28,7 @@ int		ft_color_texture(t_data *texture, int x, int y)
 		return (0);
 	if (x > texture->w || y > texture->h)
 		return (0);
-	res = (*(int*)(texture->addr + ((x + (y * texture->w)) * (texture->bits_per_pixel / 8))));
+	res = (*(int*)(texture->addr + ((x + (y * texture->w)) * \
+	(texture->bits_per_pixel / 8))));
 	return (res);
 }
