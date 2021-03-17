@@ -3,13 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cquiana <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cjani <cjani@studen.21-school.ru>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/19 21:27:03 by cquiana           #+#    #+#             */
-/*   Updated: 2020/05/19 21:28:41 by cquiana          ###   ########.fr       */
+/*   Created: 2020/05/20 12:13:24 by flexer            #+#    #+#             */
+/*   Updated: 2020/05/20 13:12:59 by cjani            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)

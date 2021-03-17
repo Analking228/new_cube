@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cquiana <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cjani <cjani@studen.21-school.ru>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/18 17:45:03 by cquiana           #+#    #+#             */
-/*   Updated: 2020/05/18 19:02:41 by cquiana          ###   ########.fr       */
+/*   Created: 2020/05/04 12:29:28 by flexer            #+#    #+#             */
+/*   Updated: 2020/05/27 21:30:04 by cjani            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *str, int c, size_t n)
+void				*ft_memchr(const void *arr, int c, size_t n)
 {
-	size_t			i;
-	unsigned char	*tmps;
-	unsigned char	sym;
+	unsigned char	*ptra;
+	unsigned char	ch;
 
-	i = 0;
-	tmps = (unsigned char*)str;
-	sym = (unsigned char)c;
-	while (i < n)
+	ch = (unsigned char)c;
+	ptra = (unsigned char *)arr;
+	while (n--)
 	{
-		if (tmps[i] == sym)
-			return (&tmps[i]);
-		i++;
+		if (*ptra == ch)
+			return (ptra);
+		ptra += 1;
 	}
 	return (NULL);
 }

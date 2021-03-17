@@ -3,35 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cquiana <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cjani <cjani@studen.21-school.ru>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/19 18:31:00 by cquiana           #+#    #+#             */
-/*   Updated: 2020/05/24 08:54:26 by cquiana          ###   ########.fr       */
+/*   Created: 2020/04/30 12:50:21 by flexer            #+#    #+#             */
+/*   Updated: 2020/05/26 22:37:52 by cjani            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	result;
+#include "libft.h"
 
-	i = 0;
-	sign = 1;
-	result = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\r'
-		|| str[i] == '\f' || str[i] == '\v')
-		i++;
-	if (str[i] == '-')
-		sign = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+int					ft_atoi(char const *str)
+{
+	int				n;
+	unsigned long	r;
+
+	n = 1;
+	r = 0;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+' || *str == '-')
 	{
-		result = (result * 10) + (str[i] - '0');
-		i++;
+		if (*str == '-')
+			n = -1;
+		str++;
 	}
-	return (result * sign);
+	while (*str != '\0' && ft_isdigit(*str))
+	{
+		if ((r * 10 + (*str - '0')) < r)
+			return ((n > 0) ? -1 : 0);
+		if ((r) > 8000)
+			return ((int)(r * n));
+		r = r * 10 + (*str - '0');
+		str++;
+	}
+	return ((int)(r * n));
 }

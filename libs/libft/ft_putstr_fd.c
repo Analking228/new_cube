@@ -3,25 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cquiana <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cjani <cjani@studen.21-school.ru>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/19 21:31:21 by cquiana           #+#    #+#             */
-/*   Updated: 2020/05/24 11:33:20 by cquiana          ###   ########.fr       */
+/*   Created: 2020/05/20 12:25:46 by flexer            #+#    #+#             */
+/*   Updated: 2020/05/27 22:20:07 by cjani            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i] != '\0')
+	if (s)
 	{
-		write(fd, &s[i], 1);
-		i++;
+		write(fd, s, ft_strlen(s));
 	}
 }

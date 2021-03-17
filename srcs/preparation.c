@@ -55,8 +55,8 @@ int			ft_preparing(t_all *all, int ac, char **av)
 	if (ft_preparing_img(&all->vars, &all->data))
 		ft_error_abort("mlx-img init failed", all, NULL);
 	ft_raycast(all);
-	if (ft_strncmp(av[2], "--save", 6) && ft_strlen(av[2]) == 6)
-		ft_screen();
+	if (ft_strnstr(av[2], "--save", 6))
+		ft_screen(all);
 	else
 		ft_error_abort("Bad argument", all, NULL);
 	return (0);

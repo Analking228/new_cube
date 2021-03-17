@@ -26,7 +26,8 @@ FILES = cub3d \
 		parser_utils \
 		sprites\
 		validator \
-		raycast_utils
+		raycast_utils \
+		screenshot
 
 SRCS_FILES = $(addsuffix .c, $(addprefix $(SRCS_DIR), $(FILES)))
 

@@ -35,25 +35,6 @@
 
 			/*********** Structs ************/
 
-typedef struct		s_screen
-{
-	t_textures		txt;
-	t_sprite		sp;
-	t_data			data;
-	t_plr			plr;
-	int				w;
-	int				h;
-	int				width;
-	int				height;
-	int				f_color;
-	int				c_color;
-	char			**map;
-	void			*mlx;
-	void			*win;
-	float			planex;
-	float			planey;
-}					t_screen;
-
 typedef struct		s_map
 {
 	char			**map;
@@ -208,13 +189,9 @@ int				ft_texture_color(t_data *texture, int x, int y);
 void		ft_validator(t_all *all);
 void		ft_validate_map(t_list *head, t_map *map, int last);
 
-/////////////////////////////////////////////
+			/********** Screeeeeen **********/
 
-int		color_no(t_all *all, int x, int y);
-int		color_ea(t_all *all, int x, int y);
-int		color_so(t_all *all, int x, int y);
-int		color_s(t_all *all, int x, int y);
-int		color_we(t_all *all, int x, int y);
-void	ft_sprite(t_all *all, float dist[]);
+void			ft_screen(t_all *all);
+void			ft_sprite(t_all *all, float dist[]);
 
 #endif

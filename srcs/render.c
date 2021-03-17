@@ -75,7 +75,7 @@ void			ft_render_sprite(t_all *all, float *dist)
 			{
 				all->sprt.d = 128 * (all->sprt.y * 2 - all->vars.h + all->sprt.sp_hight);
 				all->sprt.tex_y = all->sprt.d * all->txt.Sprite.h / all->sprt.sp_hight / 256;
-				clr = color_s(all, all->sprt.tex_x, all->sprt.tex_y);
+				clr = ft_color_texture(&all->txt.Sprite, all->sprt.tex_x, all->sprt.tex_y);
 				if (clr)
 					my_mlx_pixel_put(&all->data, all->sprt.stripe, (int)all->sprt.y, clr);
 				all->sprt.y += 1;

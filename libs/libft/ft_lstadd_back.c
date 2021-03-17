@@ -3,28 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cquiana <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cjani <cjani@studen.21-school.ru>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/24 14:18:23 by cquiana           #+#    #+#             */
-/*   Updated: 2020/11/05 18:34:11 by cquiana          ###   ########.fr       */
+/*   Created: 2020/05/21 13:00:52 by flexer            #+#    #+#             */
+/*   Updated: 2020/05/22 12:53:35 by cjani            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void		ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*tmp;
+	t_list	*last;
 
-	if (!new)
-		return ;
-	if (!*lst && new)
-		*lst = new;
-	else
+	if (*lst && lst)
 	{
-		tmp = *lst;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
+		last = ft_lstlast(*lst);
+		last->next = new;
 	}
+	else if (lst)
+		*lst = new;
 }
